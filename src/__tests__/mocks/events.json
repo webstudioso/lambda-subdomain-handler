@@ -1,0 +1,293 @@
+{
+    "studio_static_data": {
+        "Records": [
+          {
+            "cf": {
+              "config": {
+                "distributionId": "EXAMPLE"
+              },
+              "request": {
+                "clientIp": "86.45.255.5",
+                "headers": {
+                    "cookie": [
+                        {
+                            "key": "Cookie",
+                            "value": "_ga=GA1.1.979482299.1655446950; _ga_CN38H1D8NM=GS1.1.1663800848.27.1.1663800849.0.0.0; _ga_V7HG26C7GR=GS1.1.1663840299.31.0.1663840299.0.0.0; _hp2_id.3451545602=%7B%22userId%22%3A%226909087076144188%22%2C%22pageviewId%22%3A%221987852299098253%22%2C%22sessionId%22%3A%221420856239610711%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D"
+                        }
+                    ],
+                    "referer": [
+                        {
+                            "key": "Referer",
+                            "value": "https://dev.dappify.com/"
+                        }
+                    ],
+                    "x-forwarded-for": [
+                        {
+                            "key": "X-Forwarded-For",
+                            "value": "86.45.255.5"
+                        }
+                    ],
+                    "user-agent": [
+                        {
+                            "key": "User-Agent",
+                            "value": "Amazon CloudFront"
+                        }
+                    ],
+                    "via": [
+                        {
+                            "key": "Via",
+                            "value": "1.1 229cb377b4860fa1cfd58122b29d4af8.cloudfront.net (CloudFront)"
+                        }
+                    ],
+                    "accept-encoding": [
+                        {
+                            "key": "Accept-Encoding",
+                            "value": "identity"
+                        }
+                    ],
+                    "range": [
+                        {
+                            "key": "Range",
+                            "value": "bytes=0-"
+                        }
+                    ],
+                    "x-forwarded-host": [
+                        {
+                            "key": "X-Forwarded-Host",
+                            "value": "dev.dappify.com"
+                        }
+                    ],
+                    "host": [
+                        {
+                            "key": "Host",
+                            "value": "dev.dappify.com.s3.us-east-1.amazonaws.com"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "origin": {
+                    "s3": {
+                        "authMethod": "origin-access-identity",
+                        "customHeaders": {
+                            "x-dappify-default-template": [
+                                {
+                                    "key": "x-dappify-default-template",
+                                    "value": "studio"
+                                }
+                            ],
+                            "x-provider-app-id": [
+                                {
+                                    "key": "x-provider-app-id",
+                                    "value": "RTrHB7FvD1yegNEQ0OS28QefKIlXJrmaa7HPYX8n"
+                                }
+                            ],
+                            "x-provider-server-url": [
+                                {
+                                    "key": "x-provider-server-url",
+                                    "value": "https://thjcx4hd30wp.usemoralis.com:2053/server"
+                                }
+                            ]
+                        },
+                        "domainName": "dev.dappify.com.s3.us-east-1.amazonaws.com",
+                        "path": "",
+                        "region": "us-east-1"
+                    }
+                },
+                "querystring": "",
+                "uri": "/static/media/Build.46a81f6a.mp4"
+            }
+            }
+          }
+        ]
+    },
+    "studio_root": {
+        "Records": [
+            {
+              "cf": {
+                "config": {
+                  "distributionId": "EXAMPLE"
+                },
+                "request": {
+                    "clientIp": "86.45.255.5",
+                    "headers": {
+                        "cookie": [
+                            {
+                                "key": "Cookie",
+                                "value": "_ga=GA1.1.273064441.1662133327; _ga_CN38H1D8NM=GS1.1.1664107830.16.1.1664107834.0.0.0; _ga_V7HG26C7GR=GS1.1.1664107784.206.1.1664108003.0.0.0; mp_237ebb3e3f5930e0618b6138c96bfac6_mixpanel=%7B%22distinct_id%22%3A%20%22182fedddd4aa95-066d0d73e08643-1a525635-13c680-182fedddd4ba3e%22%2C%22%24device_id%22%3A%20%22182fedddd4aa95-066d0d73e08643-1a525635-13c680-182fedddd4ba3e%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D"
+                            }
+                        ],
+                        "referer": [
+                            {
+                                "key": "Referer",
+                                "value": "https://www.dappify.com/"
+                            }
+                        ],
+                        "x-forwarded-for": [
+                            {
+                                "key": "X-Forwarded-For",
+                                "value": "86.45.255.5"
+                            }
+                        ],
+                        "user-agent": [
+                            {
+                                "key": "User-Agent",
+                                "value": "Amazon CloudFront"
+                            }
+                        ],
+                        "via": [
+                            {
+                                "key": "Via",
+                                "value": "1.1 824bed252a395605de7e95bfc04bf7f2.cloudfront.net (CloudFront)"
+                            }
+                        ],
+                        "accept-encoding": [
+                            {
+                                "key": "Accept-Encoding",
+                                "value": "br,gzip"
+                            }
+                        ],
+                        "x-forwarded-host": [
+                            {
+                                "key": "X-Forwarded-Host",
+                                "value": "www.dappify.com"
+                            }
+                        ],
+                        "host": [
+                            {
+                                "key": "Host",
+                                "value": "dev.dappify.com.s3.us-east-1.amazonaws.com"
+                            }
+                        ]
+                    },
+                    "method": "GET",
+                    "origin": {
+                        "s3": {
+                            "authMethod": "origin-access-identity",
+                            "customHeaders": {
+                                "x-dappify-default-template": [
+                                    {
+                                        "key": "x-dappify-default-template",
+                                        "value": "studio"
+                                    }
+                                ],
+                                "x-provider-app-id": [
+                                    {
+                                        "key": "x-provider-app-id",
+                                        "value": "RTrHB7FvD1yegNEQ0OS28QefKIlXJrmaa7HPYX8n"
+                                    }
+                                ],
+                                "x-provider-server-url": [
+                                    {
+                                        "key": "x-provider-server-url",
+                                        "value": "https://thjcx4hd30wp.usemoralis.com:2053/server"
+                                    }
+                                ]
+                            },
+                            "domainName": "dev.dappify.com.s3.us-east-1.amazonaws.com",
+                            "path": "",
+                            "region": "us-east-1"
+                        }
+                    },
+                    "querystring": "",
+                    "uri": "/"
+                }
+            }
+            }
+        ]
+    },
+    "builder_static_data": {
+        "Records": [
+            {
+              "cf": {
+                "config": {
+                  "distributionId": "EXAMPLE"
+                },
+                "request": {
+                    "clientIp": "86.45.255.5",
+                    "headers": {
+                        "cookie": [
+                            {
+                                "key": "Cookie",
+                                "value": "_ga=GA1.1.273064441.1662133327; _ga_CN38H1D8NM=GS1.1.1664107830.16.1.1664107834.0.0.0; _ga_V7HG26C7GR=GS1.1.1664107784.206.1.1664108003.0.0.0; mp_237ebb3e3f5930e0618b6138c96bfac6_mixpanel=%7B%22distinct_id%22%3A%20%22182fedddd4aa95-066d0d73e08643-1a525635-13c680-182fedddd4ba3e%22%2C%22%24device_id%22%3A%20%22182fedddd4aa95-066d0d73e08643-1a525635-13c680-182fedddd4ba3e%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D"
+                            }
+                        ],
+                        "referer": [
+                            {
+                                "key": "Referer",
+                                "value": "https://testnew.dev.dappify.com/"
+                            }
+                        ],
+                        "x-forwarded-for": [
+                            {
+                                "key": "X-Forwarded-For",
+                                "value": "86.45.255.5"
+                            }
+                        ],
+                        "user-agent": [
+                            {
+                                "key": "User-Agent",
+                                "value": "Amazon CloudFront"
+                            }
+                        ],
+                        "via": [
+                            {
+                                "key": "Via",
+                                "value": "1.1 824bed252a395605de7e95bfc04bf7f2.cloudfront.net (CloudFront)"
+                            }
+                        ],
+                        "accept-encoding": [
+                            {
+                                "key": "Accept-Encoding",
+                                "value": "br,gzip"
+                            }
+                        ],
+                        "x-forwarded-host": [
+                            {
+                                "key": "X-Forwarded-Host",
+                                "value": "testnew.dev.dappify.com"
+                            }
+                        ],
+                        "host": [
+                            {
+                                "key": "Host",
+                                "value": "dev.dappify.com.s3.us-east-1.amazonaws.com"
+                            }
+                        ]
+                    },
+                    "method": "GET",
+                    "origin": {
+                        "s3": {
+                            "authMethod": "origin-access-identity",
+                            "customHeaders": {
+                                "x-dappify-default-template": [
+                                    {
+                                        "key": "x-dappify-default-template",
+                                        "value": "studio"
+                                    }
+                                ],
+                                "x-provider-app-id": [
+                                    {
+                                        "key": "x-provider-app-id",
+                                        "value": "RTrHB7FvD1yegNEQ0OS28QefKIlXJrmaa7HPYX8n"
+                                    }
+                                ],
+                                "x-provider-server-url": [
+                                    {
+                                        "key": "x-provider-server-url",
+                                        "value": "https://thjcx4hd30wp.usemoralis.com:2053/server"
+                                    }
+                                ]
+                            },
+                            "domainName": "dev.dappify.com.s3.us-east-1.amazonaws.com",
+                            "path": "",
+                            "region": "us-east-1"
+                        }
+                    },
+                    "querystring": "",
+                    "uri": "/favicon.ico"
+                }
+            }
+            }
+        ]
+    }
+}
