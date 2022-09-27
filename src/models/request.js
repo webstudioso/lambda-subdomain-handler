@@ -52,6 +52,19 @@ class Request {
         console.log(`Is dappify studio url ${isDappifyStudio}`);
         return isDappifyStudio;
     }
+
+    isStaticContent = () => {
+        const isNotHtml = !this.request.uri.endsWith('.html');
+        const isStatic =    this.request.uri.includes('/static/') || 
+                            this.request.uri.includes('/media/') ||
+                            this.request.uri.includes('.');
+        return isNotHtml && isStatic;
+    }
+
+    setUri = (newUri) => {
+        this.request.uri = newUri;
+        return this.request.uri;
+    }
 }
 
 module.exports = Request;

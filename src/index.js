@@ -19,10 +19,11 @@ const handler =  async (event, context, callback) => {
     const request = requestHandler.get();
     console.log(`Initial request ${JSON.stringify(request)}`);
     console.log(`Initial URI ${request.uri}`);
-    console.log("INIT LOGIC")
+    console.log("New logic init")
     let referenceTemplate = 'studio';
+    const originUrl = requestHandler.getOriginUrl();
     // Load information about project
-    const cachedTargetUrl = cache.get(requestHandler.getOriginUrl());
+    const cachedTargetUrl = cache.get(originUrl);
     if (cachedTargetUrl !== -1) {
         // Is cached, redirect
         request.uri = cachedTargetUrl;
@@ -62,7 +63,7 @@ const handler =  async (event, context, callback) => {
               } else {
                 // Not defined in uri, use default or first template key
                 // request.uri = requestHandler.isPath() ? `/${referenceTemplate}/index.html` : request.uri;
-                // console.log(`Template default found is config ${configTemplate}, setting to index ${request.uri}`);
+                // console.log(`Template found is config ${referenceTemplate}, setting to index ${request.uri}`);
                 // return callback(null, request);
               }
           }
@@ -80,109 +81,32 @@ const handler =  async (event, context, callback) => {
         console.log(`Final URI ${request.uri}`);
         // Store in cache here
     }
-    console.log("END LOGIC")
+    console.log("New logic end")
 
-
-    // Match any '/' that occurs at the end of a URI. Replace it with a default index.html
-    const isPath = path.parse(request.uri).ext === '';
-    var olduri = request.uri;
-    if (olduri.indexOf(".") === -1) {
-          olduri = olduri + '\/'
+    if (requestHandler.isPath()) {
+        // If path redirect to template/index.html
+        request.uri = `/${referenceTemplate}/index.html`;
+        console.log(`Path to uri with template ${request.uri}`)
+        requestHandler.setUri(request.uri);
+    } else if (requestHandler.isStaticContent() && request.headers['referer']) {
+        // Static explicit content
+        const uriComps = request.uri.split('/static/');
+        console.log(`Splitting ${request.uri} by /static/ has ${uriComps.length} length`);
+        if (uriComps.length > 1) {
+          request.uri = `/${referenceTemplate}/static/${uriComps[1]}`;
+          console.log(`Static path to uri with static prefix ${request.uri}`);
+          requestHandler.setUri(request.uri);
+        } else {
+          request.uri = `/${referenceTemplate}${request.uri}`;
+          console.log(`Static path to uri without static prefix ${request.uri}`);
+          requestHandler.setUri(request.uri);
+        }
     }
-    olduri = olduri.replace(/\/\//, '\/');
-    request.uri = olduri.replace(/\/$/, '\/index.html');
-    console.log(`Meta request.uri ${request.uri}`);
-   
-    // if (host === 'dappify.com' || host === 'dappify.cc') {
-    //     console.log(`Studio request ${host}`);
-    //     request.uri = isPath ? `/${defaultTemplate}/index.html` : `/${defaultTemplate}${request.uri}`;
-    //     console.log(`Redirecting to ${request.uri}`);
-    //     cache.put(host, defaultTemplate);
-    //     return callback(null, request);
-    // }
-  
-    // Has [legacy] explicit template provided? e.g https://<template>.<subdomain>.dappify.com
-    // const uriComponents = host.split('.');
-    // if (uriComponents.length === 4) {
-    //     const templateTarget = uriComponents[0];
-    //     console.log(`Template provided as part of first uri component ${templateTarget}`);
-    //     request.uri = isPath ? `/${templateTarget}/index.html` : `/${templateTarget}${request.uri}`;
-    //     return callback(null, request);
-    // }
 
-    // Is static content? if so use the referer e.g https://demo.dev.dappify.com/tokenizer to pull
-    const isStaticContent = request.uri.includes('/static') || request.uri.includes('.');
-    console.log(`Is static content ${isStaticContent} with referer ${JSON.stringify(request.headers['referer'])}`);
-    if (request.headers['referer'] && isStaticContent) {
-      // const ref = request.headers['referer'][0].value;
-      // const refComponents = ref.split('/');
-      // // e.g subd.dappify.com
-      // const basePath = refComponents[2];
-      // // e.g marketplace
-      // const templatePath = refComponents[3];
-      // Remove everything between template and /static in uri
-      const uriComps = request.uri.split('/static/');
-      console.log(`Splitting ${request.uri} by /static/ has ${uriComps.length} length`);
-      if (uriComps.length > 1) {
-        request.uri = `/${referenceTemplate}/static/${uriComps[1]}`;
-        console.log(`Redirecting static path to uri with static prefix ${request.uri}`);
-        return callback(null, request);
-      } else {
-        request.uri = `/${referenceTemplate}${request.uri}`;
-        console.log(`Redirecting static path to uri without static prefix ${request.uri}`);
-        return callback(null, request);
-      }
-    }
-  
-    // Has [new] explicit template provided? e.g https://<subdomain>.dappify.com/<template>
-    // const uriTemplate = utilsPath.getTemplateFromUri(request.uri);
-    // if (uriTemplate !== null) {
-    //     console.log(`Template provided as part of first path component ${uriTemplate}`);
-    //     request.uri = isPath ? `/${uriTemplate}/index.html` : request.uri;
-    //     return callback(null, request);
-    // }
-
-    // If cached, redirect
-    // const cachedTemplateValue = cache.get(host);
-    // if (cachedTemplateValue !== -1 && !cachedTemplateValue.includes('//')) {
-    //     request.uri = isPath ? `/${cachedTemplateValue}/index.html` : `/${cachedTemplateValue}${request.uri}`;
-    //     console.log(`Found in cache, redirecting to ${request.uri}`);
-    //     return callback(null, request);
-    // }
-        
-
-
-    request.uri = isPath ? `/${referenceTemplate}/index.html` : `/${referenceTemplate}${request.uri}`;
-    cache.put(host, referenceTemplate);
-    console.log(`Final Redirecting to ${request.uri}`);
-    return callback(null, request);
-
-    // https.get(requestHandler.getCloudFunctionUrl(), (resp) => {
-    //   let data = '';
-    
-    //   // A chunk of data has been received.
-    //   resp.on('data', (chunk) => {
-    //     data += chunk;
-    //   });
-    
-    //   // The whole response has been received. Print out the result.
-    //   resp.on('end', () => {
-    //     const response = JSON.parse(data);
-    //     // Is builder IPFS?
-    //     // const proj = response.result;
-    //     // const targetTemp = !_.isEmpty(proj?.config.type) ? proj?.config.type : Object.keys(proj?.config.template)[0];
-    //     request.uri = isPath ? `/${referenceTemplate}/index.html` : `/${referenceTemplate}${request.uri}`;
-    //     cache.put(host, targetTemp);
-    //     console.log(`Redirecting to ${request.uri}`);
-    //     return callback(null, request);
-    //   });
-    
-    // }).on("error", (err) => {
-    //   console.log("Error: " + err.message);
-    //   console.log(`Redirecting to ${request.uri}`);
-    //   request.uri = isPath ? `/${defaultTemplate}/index.html` : `/${defaultTemplate}{request.uri}`;
-    //   return callback(null, request);
-    // });
+    const finalRequest = requestHandler.get();
+    console.log(`Finally redirecting to ${finalRequest}`);
+    cache.put(originUrl, finalRequest.uri);
+    return callback(null, finalRequest);
 };
 
 module.exports = handler

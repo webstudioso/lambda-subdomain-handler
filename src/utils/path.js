@@ -1,4 +1,4 @@
-const getTemplateFromUri = (path='') => {
+getTemplateFromUri = (path='') => {
     const components = path.split('/');
     if (!path.includes('/')) return null;
     if (path.startsWith('/static')) return null;
