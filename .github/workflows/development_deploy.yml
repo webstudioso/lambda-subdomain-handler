@@ -23,17 +23,17 @@ jobs:
           env:
             CI: true
         - name: Compress source into Zip file
-          uses: montudor/action-zip@v0.1.0
+          uses: montudor/action-zip@v1
           with:
             args: zip -qq -r ./bundle.zip ./
         - name: Deploy to AWS Lambda
-          uses: appleboy/lambda-action@master
+          uses: yvesgurcan/deploy-lambda-function
           with:
-            aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws_region: us-east-1
-            function_name: subdomainEdgeHandler
-            zip_file: bundle.zip
+            package: bundle.zip
+            function-name: subdomainEdgeHandler
+            AWS_REGION: ${{ secrets.AWS_REGION }}
+            AWS_SECRET_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+            AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
         - name: Update Cloudfront Distribution
           uses: chaitanyapotti/cloudfront-update-distribution
           with:
