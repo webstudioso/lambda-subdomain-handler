@@ -27,13 +27,15 @@ jobs:
           with:
             args: zip -qq -r ./bundle.zip ./
         - name: Deploy to AWS Lambda
-          uses: yvesgurcan/deploy-lambda-function@0.0.5
+          uses: appleboy/lambda-action@master
           with:
-            package: bundle.zip
-            function-name: subdomainEdgeHandler
-            AWS_REGION: ${{ secrets.AWS_REGION }}
-            AWS_SECRET_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
-            AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+            aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+            aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+            aws_region: us-east-1
+            function_name: subdomainEdgeHandler
+            zip_file: bundle.zip
+            runtime: nodejs14.x
+
         # - name: Update Cloudfront Distribution
         #   uses: chaitanyapotti/cloudfront-update-distribution
         #   with:
