@@ -17,8 +17,7 @@ jobs:
           with:
             node-version: ${{ matrix.node-version }}
         - name: Build dependencies
-          run: |
-            npm ci
+          run:
             npm -i --legacy-peer-deps
           env:
             CI: true
