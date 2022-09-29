@@ -35,13 +35,13 @@ jobs:
             function_name: subdomainEdgeHandler
             zip_file: bundle.zip
         - name: Update Cloudfront Distribution
-            uses: chaitanyapotti/cloudfront-update-distribution
-            with:
-              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-              aws-region: us-east-2
-              cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
-              cloudfront-distribution-config: ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_CONFIG_BASE64_DEV }}
+          uses: chaitanyapotti/cloudfront-update-distribution
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-east-2
+            cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+            cloudfront-distribution-config: ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_CONFIG_BASE64_DEV }}
         - name: Invalidate Cloudfront Cache
           env:
             CF_DIST: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
