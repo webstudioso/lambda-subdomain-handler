@@ -40,7 +40,7 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
             aws-region: us-east-2
             cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
-            cloudfront-distribution-config: ${{ secretss.AWS_CLOUDFRONT_DISTRIBUTION_CONFIG_BASE64_DEV }}
+            cloudfront-distribution-config: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_CONFIG_BASE64_DEV }}
         - name: Invalidate CloudFront Cache
           uses: chetan/invalidate-cloudfront-action@v2
           env:
