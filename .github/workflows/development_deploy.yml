@@ -1,0 +1,48 @@
+name: Lambda Subdoain Handler Development
+on:
+  push:
+    branches:
+      - development
+jobs:
+  deploy_source:
+      name: Build and deploy
+      strategy:
+        matrix:
+          node-version: [14.x]
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Build dependencies
+          run: |
+            npm ci
+            npm -i --legacy-peer-deps
+          env:
+            CI: true
+        - name: Compress source into Zip file
+          uses: montudor/action-zip@v0.1.0
+          with:
+            args: zip -qq -r ./bundle.zip ./
+        - name: Deploy to AWS Lambda
+          uses: appleboy/lambda-action@master
+          with:
+            aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws_region: us-east-1
+            function_name: subdomainEdgeHandler
+            zip_file: bundle.zip
+        - name: Update Cloudfront Distribution
+              uses: chaitanyapotti/cloudfront-update-distribution
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: us-east-2
+                cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+                cloudfront-distribution-config: ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_CONFIG_BASE64_DEV }}
+        - name: Invalidate Cloudfront Cache
+          env:
+            CF_DIST: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+          run: aws cloudfront create-invalidation --distribution-id $CF_DIST --paths '/*'
