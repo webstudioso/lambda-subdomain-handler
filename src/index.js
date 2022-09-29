@@ -17,7 +17,7 @@ const handler =  async (event, context, callback) => {
     const host = requestHandler.getHost();
     const defaultTemplate = requestHandler.getDefaultTemplate();
     const request = requestHandler.get();
-    console.log(`Initial request ${JSON.stringify(request)}`);
+    console.log(`Received request with data ${JSON.stringify(request)}`);
 
     let referenceTemplate = 'studio';
     const originUrl = requestHandler.getOriginUrl();
