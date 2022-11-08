@@ -21,6 +21,7 @@ const handler =  async (event, context, callback) => {
 
     let referenceTemplate = 'studio';
     const originUrl = requestHandler.getOriginUrl();
+    const refererUri = requestHandler.getRefererUrl();
     // Load information about project
     const cachedTargetUrl = cache.get(originUrl);
     if (cachedTargetUrl !== -1) {
@@ -54,9 +55,12 @@ const handler =  async (event, context, callback) => {
           }
           // Resolve templates studio, try first from uri if provided
           else if (!_.isEmpty(project.config.type)) {
-              const uriTemplate = utilsPath.getTemplateFromUri(request.uri);
+              const uriTemplate = refererUri ? 
+                                    utilsPath.getTemplateFromReferer(refererUri) :
+                                    utilsPath.getTemplateFromUri(request.uri);
               // Found in uri
               if (!_.isEmpty(uriTemplate)) {
+                referenceTemplate = uriTemplate;
                 // request.uri = requestHandler.isPath() ? `/${uriTemplate}/index.html` : request.uri;
                 // console.log(`Template found is path, setting to index ${request.uri}`);
                 // return callback(null, request);
@@ -79,6 +83,7 @@ const handler =  async (event, context, callback) => {
         // Final request
         console.log(`Final request ${JSON.stringify(request)}`);
         console.log(`Final URI ${request.uri}`);
+        console.log(`Final Reference Template ${referenceTemplate}`);
         // Store in cache here
     }
     console.log("New logic end")
