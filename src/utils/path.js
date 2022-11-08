@@ -8,3 +8,12 @@ getTemplateFromUri = (path='') => {
 }
 
 exports.getTemplateFromUri = getTemplateFromUri;
+
+getTemplateFromReferer= (path='') => {
+    const components = path.split('/');
+    if (!path.includes('/')) return null;
+    if (components.length < 4) return null;
+    return components[3];
+}
+
+exports.getTemplateFromReferer = getTemplateFromReferer;

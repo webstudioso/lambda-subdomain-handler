@@ -17,11 +17,11 @@ const handler =  async (event, context, callback) => {
     const host = requestHandler.getHost();
     const defaultTemplate = requestHandler.getDefaultTemplate();
     const request = requestHandler.get();
-    console.log(`Initial request ${JSON.stringify(request)}`);
-    console.log(`Initial URI ${request.uri}`);
-    console.log("New logic init")
+    console.log(`Request data -> ${JSON.stringify(request)}`);
+
     let referenceTemplate = 'studio';
     const originUrl = requestHandler.getOriginUrl();
+    const refererUri = requestHandler.getRefererUrl();
     // Load information about project
     const cachedTargetUrl = cache.get(originUrl);
     if (cachedTargetUrl !== -1) {
@@ -35,17 +35,18 @@ const handler =  async (event, context, callback) => {
         if (!_.isEmpty(project)) {
           console.log(`Project found ${JSON.stringify(project)}`);
           referenceTemplate = !_.isEmpty(project.config.type) ? project.config.type : Object.keys(project.config.template)[0];
-          // Resolve IPFS
+          // Resolve IPFS but don't cache yet
           if (!_.isEmpty(project.hash)) {
-            console.log(`IPFS hash found ${project.hash}`);
-            callback(null, {
+            const destination = `https://dappify.mypinata.cloud/ipfs/${project.hash}`;
+            console.log(`IPFS hash found ${project.hash} redirecting to destination ${destination}`);
+            return callback(null, {
               status: "302",
               statusDescription: "Found",
               headers: {
                 location: [
                   {
                     key: "Location",
-                    value: `https://dappify.mypinata.cloud/ipfs/${project.hash}`
+                    value: destination
                   }
                 ],
                 "aws-redirect-from": [{key:"aws-redirect-from", value: host}] 
@@ -54,9 +55,12 @@ const handler =  async (event, context, callback) => {
           }
           // Resolve templates studio, try first from uri if provided
           else if (!_.isEmpty(project.config.type)) {
-              const uriTemplate = utilsPath.getTemplateFromUri(request.uri);
+              const uriTemplate = refererUri ? 
+                                    utilsPath.getTemplateFromReferer(refererUri) :
+                                    utilsPath.getTemplateFromUri(request.uri);
               // Found in uri
               if (!_.isEmpty(uriTemplate)) {
+                referenceTemplate = uriTemplate;
                 // request.uri = requestHandler.isPath() ? `/${uriTemplate}/index.html` : request.uri;
                 // console.log(`Template found is path, setting to index ${request.uri}`);
                 // return callback(null, request);
@@ -79,6 +83,7 @@ const handler =  async (event, context, callback) => {
         // Final request
         console.log(`Final request ${JSON.stringify(request)}`);
         console.log(`Final URI ${request.uri}`);
+        console.log(`Final Reference Template ${referenceTemplate}`);
         // Store in cache here
     }
     console.log("New logic end")

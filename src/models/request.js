@@ -42,6 +42,14 @@ class Request {
         return originUrlWithoutTrailingSlashes;
     }
 
+    getRefererUrl = () => {
+        // Referer is optional, usually passed when loading static content
+        const referer = this.request.headers['referer'];
+        const refererUrl = referer && referer.length > 0 ?referer[0].value : '';
+        console.log(`Referer url is ${refererUrl}`);
+        return refererUrl;
+    }
+
     isPath = () => {
         return path.parse(this.request.uri).ext === '';
     }

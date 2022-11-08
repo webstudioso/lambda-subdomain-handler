@@ -1,0 +1,51 @@
+name: Lambda Subdoain Handler Development
+on:
+  push:
+    branches:
+      - development
+jobs:
+  deploy_source:
+      name: Build and deploy
+      strategy:
+        matrix:
+          node-version: [14.x]
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Build dependencies
+          run:
+            npm i --legacy-peer-deps
+          env:
+            CI: true
+        - name: Compress source into Zip file
+          uses: montudor/action-zip@v1
+          with:
+            args: zip -qq -r ./bundle.zip ./
+        - name: Deploy to AWS Lambda
+          uses: yvesgurcan/deploy-lambda-function@master
+          with:
+            AWS_SECRET_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+            AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+            AWS_REGION: us-east-1
+            function-name: subdomainEdgeHandler
+            package: bundle.zip
+        - name: Update Cloudfront Distribution
+          uses: chaitanyapotti/cloudfront-update-distribution@master
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+            aws-region: us-east-2
+            cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+            cloudfront-distribution-config: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_CONFIG_BASE64_DEV }}
+        - name: Invalidate CloudFront Cache
+          uses: chetan/invalidate-cloudfront-action@v2
+          env:
+            DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+            PATHS: "/*"
+            AWS_REGION: ${{ secrets.AWS_REGION }}
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
