@@ -11,16 +11,16 @@ describe('Request', () => {
 
     test('Sets up constructor correctly from static media request', () => {
         const request = new Request(events.studio_static_data);
-        expect(request.getHost()).toBe('dappify.com');
+        expect(request.getHost()).toBe('studio.dappify.com');
     });
 
     test('getOriginUrl returns full url', () => {
         const requestA = new Request(events.studio_static_data);
-        expect(requestA.getOriginUrl()).toBe('https://dev.dappify.com/static/media/Build.46a81f6a.mp4');
+        expect(requestA.getOriginUrl()).toBe('https://studio.dev.dappify.com/static/media/Build.46a81f6a.mp4');
         const requestB = new Request(events.builder_static_data);
         expect(requestB.getOriginUrl()).toBe('https://testnew.dev.dappify.com/favicon.ico');
         const requestC = new Request(events.studio_root);
-        expect(requestC.getOriginUrl()).toBe('https://www.dappify.com');
+        expect(requestC.getOriginUrl()).toBe('https://studio.dappify.com');
     });
 
     test('getCloudFunctionUrl returns valid url', () => {
@@ -40,6 +40,15 @@ describe('Request', () => {
         const uri = '/test/me';
         const reply = requestA.setUri(uri);
         expect(reply).toBe(uri);
+    });
+
+    test('isStudio returns true when is a studio url', () => {
+        const requestA = new Request(events.studio_static_data);
+        expect(requestA.isStudio()).toBe(true);
+        const requestB = new Request(events.studio_root);
+        expect(requestB.isStudio()).toBe(true);
+        const requestC = new Request(events.builder_static_data);
+        expect(requestC.isStudio()).toBe(false);
     });
 
     test('isStaticContent returns true when /static/ path is contained', () => {
