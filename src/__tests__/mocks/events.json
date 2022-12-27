@@ -18,7 +18,7 @@
                     "referer": [
                         {
                             "key": "Referer",
-                            "value": "https://dev.dappify.com/"
+                            "value": "https://studio.dev.dappify.com/"
                         }
                     ],
                     "x-forwarded-for": [
@@ -54,7 +54,7 @@
                     "x-forwarded-host": [
                         {
                             "key": "X-Forwarded-Host",
-                            "value": "dev.dappify.com"
+                            "value": "studio.dev.dappify.com"
                         }
                     ],
                     "host": [
@@ -119,7 +119,7 @@
                         "referer": [
                             {
                                 "key": "Referer",
-                                "value": "https://www.dappify.com/"
+                                "value": "https://studio.dappify.com/"
                             }
                         ],
                         "x-forwarded-for": [
@@ -149,7 +149,7 @@
                         "x-forwarded-host": [
                             {
                                 "key": "X-Forwarded-Host",
-                                "value": "www.dappify.com"
+                                "value": "studio.dappify.com"
                             }
                         ],
                         "host": [

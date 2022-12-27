@@ -55,10 +55,7 @@ class Request {
     }
 
     isStudio = () => {
-        const host = this.getHost();
-        const isDappifyStudio = host === 'dappify.com' || host === 'dappify.cc';
-        console.log(`Is dappify studio url ${isDappifyStudio}`);
-        return isDappifyStudio;
+        return this.getHost().includes('studio.');
     }
 
     isStaticContent = () => {
@@ -72,6 +69,48 @@ class Request {
     setUri = (newUri) => {
         this.request.uri = newUri;
         return this.request.uri;
+    }
+
+    getUri = () => {
+        return this.request.uri;
+    }
+
+    prepareStudioRequest = () => {
+        const defaultTemplate = this.getDefaultTemplate();
+        if (this.isPath()) {
+            // If path redirect to template/index.html
+            this.setUri(`/${defaultTemplate}/index.html`);
+        } else if (this.isStaticContent()) {
+            // Static explicit content
+            const uri = this.getUri();
+            const uriComps = uri.split('/static/');
+            if (uriComps.length > 1) {
+                this.setUri(`/${defaultTemplate}/static/${uriComps[1]}`);
+            } else {
+                this.setUri(`/${defaultTemplate}${uri}`);
+            }
+        }
+        return this.get();
+    }
+
+    prepareProjectRequest = (cid) => {
+        this.request.origin = {
+            custom: {
+            domainName: 'ipfs.moralis.io',
+            port: 2053,
+            protocol: 'https',
+            path: '',
+            sslProtocols: ['TLSv1', 'TLSv1.1', 'TLSv1.2'],
+            readTimeout: 5,
+            keepaliveTimeout: 5,
+            customHeaders: {}
+            }
+        }
+        this.request.headers['host'] = [{ key: 'host', value: 'ipfs.moralis.io' }]
+        const originallUri = this.request.uri === '/' ? '/index.html' : this.request.uri;
+        const extensionUri = originallUri.includes('.') ? originallUri : `${originallUri}.html`;
+        this.request.uri = `/ipfs/${cid}${extensionUri}`;
+        return this.get();
     }
 }
 
