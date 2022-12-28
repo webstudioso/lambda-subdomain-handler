@@ -13,13 +13,18 @@ class Request {
         return this.request.origin.s3.customHeaders['x-dappify-default-template'][0].value;
     }
 
+    getOrigin = () => {
+        return this.request.headers['x-forwarded-host'][0].value;
+    }
+
     getCloudFunctionUrl = () => {
-        const url = `https://${this.getHost()}`;
-        const serverAppId = this.request.origin.s3.customHeaders['x-provider-app-id'][0].value;
+        // const url = `https://${this.getHost()}`;
+        // const serverAppId = this.request.origin.s3.customHeaders['x-provider-app-id'][0].value;
         const serverUrl = this.request.origin.s3.customHeaders['x-provider-server-url'][0].value;
-        const cfUrl = `${serverUrl}/functions/getTemplateByDomain?_ApplicationId=${serverAppId}&url=${url}&data=${this.getHost()}`;
-        console.log(`Cloud function url ${cfUrl}`);
-        return cfUrl;
+        // const cfUrl = `${serverUrl}/functions/getTemplateByDomain?_ApplicationId=${serverAppId}&url=${url}&data=${this.getHost()}`;
+        const apiUrl = `${serverUrl}/${this.getOrigin()}`
+        console.log(`Cloud function url ${apiUrl}`);
+        return apiUrl;
     }
 
     get = () => {
@@ -27,12 +32,12 @@ class Request {
     }
 
     getHost = () => {
-        const forwardHost = this.request.headers['x-forwarded-host'][0].value;
+        const forwardHost = this.getOrigin();
         return forwardHost.replace('staging.','').replace('dev.','').replace('www.','');
     }
 
     getOriginUrl = () => {
-        const originHost = this.request.headers['x-forwarded-host'][0].value || '';
+        const originHost = this.getOrigin() || '';
         // Remove trailing slashes from host and leading slashes from uri
         const hostWithoutTrailingSlashes = originHost.replace(/\/$/, '');
         const uriWithoutLeadingSlashes = this.request.uri.replace(/^\/+/, '');

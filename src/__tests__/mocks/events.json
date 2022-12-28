@@ -84,7 +84,7 @@
                             "x-provider-server-url": [
                                 {
                                     "key": "x-provider-server-url",
-                                    "value": "https://thjcx4hd30wp.usemoralis.com:2053/server"
+                                    "value": "https://api.dev.dappify.com/route"
                                 }
                             ]
                         },
@@ -179,7 +179,7 @@
                                 "x-provider-server-url": [
                                     {
                                         "key": "x-provider-server-url",
-                                        "value": "https://thjcx4hd30wp.usemoralis.com:2053/server"
+                                        "value": "https://api.dev.dappify.com/route"
                                     }
                                 ]
                             },
@@ -274,7 +274,7 @@
                                 "x-provider-server-url": [
                                     {
                                         "key": "x-provider-server-url",
-                                        "value": "https://thjcx4hd30wp.usemoralis.com:2053/server"
+                                        "value":  "https://api.dev.dappify.com/route"
                                     }
                                 ]
                             },
