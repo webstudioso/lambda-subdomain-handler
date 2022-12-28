@@ -25,7 +25,7 @@ describe('Request', () => {
 
     test('getCloudFunctionUrl returns valid url', () => {
         const requestA = new Request(events.builder_static_data);
-        expect(requestA.getCloudFunctionUrl()).toBe('https://thjcx4hd30wp.usemoralis.com:2053/server/functions/getTemplateByDomain?_ApplicationId=RTrHB7FvD1yegNEQ0OS28QefKIlXJrmaa7HPYX8n&url=https://testnew.dappify.com&data=testnew.dappify.com');
+        expect(requestA.getCloudFunctionUrl()).toBe('https://api.dev.dappify.com/route/testnew.dev.dappify.com');
     });
 
     test('setUri overrides existing uri', () => {
