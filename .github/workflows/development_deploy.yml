@@ -1,4 +1,4 @@
-name: Lambda Subdoain Handler Development
+name: Lambda Subdomain Handler Development
 on:
   push:
     branches:

@@ -1,4 +1,4 @@
-name: Lambda Subdoain Handler Production
+name: Lambda Subdomain Handler Production
 on:
   push:
     branches:

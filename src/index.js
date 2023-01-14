@@ -7,7 +7,7 @@ const handler =  async (event, context, callback) => {
     const request = new Request(event);
     console.log(`[REQUEST] Received ${JSON.stringify(request.get())}`);
     let response;
-    // Studio request e.g. studio.dev.dappify.com/* / studio.dappify.com/*
+    // App request e.g. app.dev.webstudio.com/* / app.webstudio.so/*
     if (request.isStudio()) {
       console.log(`[REQUEST] Processing studio request}`);
       response = request.prepareStudioRequest();

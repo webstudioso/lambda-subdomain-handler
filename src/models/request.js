@@ -10,7 +10,7 @@ class Request {
     }
 
     getDefaultTemplate = () => {
-        return this.request.origin.s3.customHeaders['x-dappify-default-template'][0].value;
+        return 'app';
     }
 
     getOrigin = () => {
@@ -18,10 +18,7 @@ class Request {
     }
 
     getCloudFunctionUrl = () => {
-        // const url = `https://${this.getHost()}`;
-        // const serverAppId = this.request.origin.s3.customHeaders['x-provider-app-id'][0].value;
         const serverUrl = this.request.origin.s3.customHeaders['x-provider-server-url'][0].value;
-        // const cfUrl = `${serverUrl}/functions/getTemplateByDomain?_ApplicationId=${serverAppId}&url=${url}&data=${this.getHost()}`;
         const apiUrl = `${serverUrl}/${this.getOrigin()}`
         console.log(`Cloud function url ${apiUrl}`);
         return apiUrl;
@@ -33,7 +30,7 @@ class Request {
 
     getHost = () => {
         const forwardHost = this.getOrigin();
-        return forwardHost.replace('staging.','').replace('dev.','').replace('www.','');
+        return forwardHost.replace('dev.','').replace('www.','');
     }
 
     getOriginUrl = () => {
@@ -60,7 +57,7 @@ class Request {
     }
 
     isStudio = () => {
-        return this.getHost().includes('studio.');
+        return this.getHost().includes('app.');
     }
 
     isStaticContent = () => {
