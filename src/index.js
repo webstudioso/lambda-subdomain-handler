@@ -14,14 +14,12 @@ const handler =  async (event, context, callback) => {
     } else {
       const configResponse = await axios.get(request.getCloudFunctionUrl());
       const cid = configResponse?.data?.cid;
-      // const project = configResponse?.data?.result;
-      // const cid = project?.hash;
-
       if (cid) {
         console.log(`[REQUEST] processing project request for CID ${cid}`);
         response = request.prepareProjectRequest(cid);
       } else {
-        console.log(`[NO MAPPING] this origin does not have any CID mapping`);
+        console.log(`[NO MAPPING] this origin does not have any CID mapping, showing error page`);
+        response = request.prepareErrorPage();
       }
     }
     console.log(`[REQUEST] Transformed to ${JSON.stringify(response)}`);
