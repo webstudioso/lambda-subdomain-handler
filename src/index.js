@@ -9,7 +9,7 @@ const handler =  async (event, context, callback) => {
     let response;
     // App request e.g. app.dev.webstudio.com/* / app.webstudio.so/*
     if (request.isStudio()) {
-      console.log(`[REQUEST] Processing studio request}`);
+      console.log(`[REQUEST] Processing studio request`);
       response = request.prepareStudioRequest();
     } else {
       const configResponse = await axios.get(request.getCloudFunctionUrl());

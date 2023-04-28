@@ -57,7 +57,7 @@ class Request {
     }
 
     isStudio = () => {
-        return this.getHost().includes('app.');
+        return this.getHost().startsWith('app.');
     }
 
     isStaticContent = () => {
