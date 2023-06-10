@@ -1,5 +1,7 @@
 const path = require('path');
 
+const ipfsProviderUrl = 'ipfs.io';
+
 class Request {
 
     request;
@@ -98,9 +100,9 @@ class Request {
     prepareProjectRequest = (cid) => {
         this.request.origin = {
             custom: {
-            domainName: 'ipfs.moralis.io',
-            port: 2053,
+            domainName: ipfsProviderUrl,
             protocol: 'https',
+            port: 443,
             path: '',
             sslProtocols: ['TLSv1', 'TLSv1.1', 'TLSv1.2'],
             readTimeout: 5,
@@ -108,7 +110,7 @@ class Request {
             customHeaders: {}
             }
         }
-        this.request.headers['host'] = [{ key: 'host', value: 'ipfs.moralis.io' }]
+        this.request.headers['host'] = [{ key: 'host', value: ipfsProviderUrl }]
         const originallUri = this.request.uri === '/' ? '/index.html' : this.request.uri;
         const extensionUri = originallUri.includes('.') ? originallUri : `${originallUri}.html`;
         this.request.uri = `/ipfs/${cid}${extensionUri}`;
@@ -118,8 +120,8 @@ class Request {
     prepareErrorPage = () => {
         this.request.origin = {
             custom: {
-            domainName: 'ipfs.moralis.io',
-            port: 2053,
+            domainName: ipfsProviderUrl,
+            port: 443,
             protocol: 'https',
             path: '',
             sslProtocols: ['TLSv1', 'TLSv1.1', 'TLSv1.2'],
@@ -128,7 +130,7 @@ class Request {
             customHeaders: {}
             }
         }
-        this.request.headers['host'] = [{ key: 'host', value: 'ipfs.moralis.io' }];
+        this.request.headers['host'] = [{ key: 'host', value: ipfsProviderUrl }];
         this.request.uri = '/ipfs/QmWpw3hsQr1Mh6kajgcGuhRYZ3yq2copEMs5952CoUKxx8';
         return this.get();
     }
