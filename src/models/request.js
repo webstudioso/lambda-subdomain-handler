@@ -1,6 +1,7 @@
 const path = require('path');
 
-const ipfsProviderUrl = 'ipfs.io';
+const ipfsProviderUrl = 'gateway.ipfs.io';
+const errorCid = 'QmeYSQXwGBCZKR5QESBbdwPPRRNFwiy5k2X6VHhVA11uC7';
 
 class Request {
 
@@ -118,21 +119,8 @@ class Request {
     }
 
     prepareErrorPage = () => {
-        this.request.origin = {
-            custom: {
-            domainName: ipfsProviderUrl,
-            port: 443,
-            protocol: 'https',
-            path: '',
-            sslProtocols: ['TLSv1', 'TLSv1.1', 'TLSv1.2'],
-            readTimeout: 5,
-            keepaliveTimeout: 5,
-            customHeaders: {}
-            }
-        }
-        this.request.headers['host'] = [{ key: 'host', value: ipfsProviderUrl }];
-        this.request.uri = '/ipfs/QmWpw3hsQr1Mh6kajgcGuhRYZ3yq2copEMs5952CoUKxx8';
-        return this.get();
+        // Error CID
+        return this.prepareProjectRequest(errorCid);
     }
 }
 
