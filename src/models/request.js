@@ -1,8 +1,5 @@
 const path = require('path');
 
-const ipfsProviderUrl = 'gateway.ipfs.io';
-const errorCid = 'QmeYSQXwGBCZKR5QESBbdwPPRRNFwiy5k2X6VHhVA11uC7';
-
 class Request {
 
     request;
@@ -99,6 +96,7 @@ class Request {
     }
 
     prepareProjectRequest = (cid) => {
+        const ipfsProviderUrl = this.request.origin.s3.customHeaders['x-provider-ipfs'][0].value;
         this.request.origin = {
             custom: {
             domainName: ipfsProviderUrl,
@@ -120,6 +118,7 @@ class Request {
 
     prepareErrorPage = () => {
         // Error CID
+        const errorCid = this.request.origin.s3.customHeaders['x-error-cid'][0].value;
         return this.prepareProjectRequest(errorCid);
     }
 }

@@ -18,7 +18,7 @@
                     "referer": [
                         {
                             "key": "Referer",
-                            "value": "https://studio.dev.dappify.com/"
+                            "value": "https://app.dev.webstudio.so/"
                         }
                     ],
                     "x-forwarded-for": [
@@ -54,13 +54,13 @@
                     "x-forwarded-host": [
                         {
                             "key": "X-Forwarded-Host",
-                            "value": "studio.dev.dappify.com"
+                            "value": "app.dev.webstudio.so"
                         }
                     ],
                     "host": [
                         {
                             "key": "Host",
-                            "value": "dev.dappify.com.s3.us-east-1.amazonaws.com"
+                            "value": "dev.webstudio.so.s3.us-east-1.amazonaws.com"
                         }
                     ]
                 },
@@ -84,11 +84,11 @@
                             "x-provider-server-url": [
                                 {
                                     "key": "x-provider-server-url",
-                                    "value": "https://api.dev.dappify.com/route"
+                                    "value": "https://api.dev.webstudio.so/route"
                                 }
                             ]
                         },
-                        "domainName": "dev.dappify.com.s3.us-east-1.amazonaws.com",
+                        "domainName": "dev.webstudio.so.s3.us-east-1.amazonaws.com",
                         "path": "",
                         "region": "us-east-1"
                     }
@@ -119,7 +119,7 @@
                         "referer": [
                             {
                                 "key": "Referer",
-                                "value": "https://studio.dappify.com/"
+                                "value": "https://app.webstudio.so/"
                             }
                         ],
                         "x-forwarded-for": [
@@ -149,13 +149,13 @@
                         "x-forwarded-host": [
                             {
                                 "key": "X-Forwarded-Host",
-                                "value": "studio.dappify.com"
+                                "value": "app.webstudio.so"
                             }
                         ],
                         "host": [
                             {
                                 "key": "Host",
-                                "value": "dev.dappify.com.s3.us-east-1.amazonaws.com"
+                                "value": "dev.webstudio.so.s3.us-east-1.amazonaws.com"
                             }
                         ]
                     },
@@ -179,11 +179,11 @@
                                 "x-provider-server-url": [
                                     {
                                         "key": "x-provider-server-url",
-                                        "value": "https://api.dev.dappify.com/route"
+                                        "value": "https://api.dev.webstudio.so/route"
                                     }
                                 ]
                             },
-                            "domainName": "dev.dappify.com.s3.us-east-1.amazonaws.com",
+                            "domainName": "dev.webstudio.so.s3.us-east-1.amazonaws.com",
                             "path": "",
                             "region": "us-east-1"
                         }
@@ -214,7 +214,7 @@
                         "referer": [
                             {
                                 "key": "Referer",
-                                "value": "https://testnew.dev.dappify.com/"
+                                "value": "https://testnew.dev.webstudio.so/"
                             }
                         ],
                         "x-forwarded-for": [
@@ -244,13 +244,13 @@
                         "x-forwarded-host": [
                             {
                                 "key": "X-Forwarded-Host",
-                                "value": "testnew.dev.dappify.com"
+                                "value": "testnew.dev.webstudio.so"
                             }
                         ],
                         "host": [
                             {
                                 "key": "Host",
-                                "value": "dev.dappify.com.s3.us-east-1.amazonaws.com"
+                                "value": "dev.webstudio.so.s3.us-east-1.amazonaws.com"
                             }
                         ]
                     },
@@ -274,11 +274,11 @@
                                 "x-provider-server-url": [
                                     {
                                         "key": "x-provider-server-url",
-                                        "value":  "https://api.dev.dappify.com/route"
+                                        "value":  "https://api.dev.webstudio.so/route"
                                     }
                                 ]
                             },
-                            "domainName": "dev.dappify.com.s3.us-east-1.amazonaws.com",
+                            "domainName": "dev.webstudio.so.s3.us-east-1.amazonaws.com",
                             "path": "",
                             "region": "us-east-1"
                         }

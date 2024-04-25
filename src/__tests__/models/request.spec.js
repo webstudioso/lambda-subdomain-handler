@@ -11,21 +11,21 @@ describe('Request', () => {
 
     test('Sets up constructor correctly from static media request', () => {
         const request = new Request(events.studio_static_data);
-        expect(request.getHost()).toBe('studio.dappify.com');
+        expect(request.getHost()).toBe('app.webstudio.so');
     });
 
     test('getOriginUrl returns full url', () => {
         const requestA = new Request(events.studio_static_data);
-        expect(requestA.getOriginUrl()).toBe('https://studio.dev.dappify.com/static/media/Build.46a81f6a.mp4');
+        expect(requestA.getOriginUrl()).toBe('https://app.dev.webstudio.so/static/media/Build.46a81f6a.mp4');
         const requestB = new Request(events.builder_static_data);
-        expect(requestB.getOriginUrl()).toBe('https://testnew.dev.dappify.com/favicon.ico');
+        expect(requestB.getOriginUrl()).toBe('https://testnew.dev.webstudio.so/favicon.ico');
         const requestC = new Request(events.studio_root);
-        expect(requestC.getOriginUrl()).toBe('https://studio.dappify.com');
+        expect(requestC.getOriginUrl()).toBe('https://app.webstudio.so');
     });
 
     test('getCloudFunctionUrl returns valid url', () => {
         const requestA = new Request(events.builder_static_data);
-        expect(requestA.getCloudFunctionUrl()).toBe('https://api.dev.dappify.com/route/testnew.dev.dappify.com');
+        expect(requestA.getCloudFunctionUrl()).toBe('https://api.dev.webstudio.so/route/testnew.dev.webstudio.so');
     });
 
     test('setUri overrides existing uri', () => {
